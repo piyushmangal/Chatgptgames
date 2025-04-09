@@ -1,1 +1,63 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacker Console</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 20px;
+    }
+    #console {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid #00ff00;
+      padding: 10px;
+      height: 500px;
+      overflow-y: auto;
+      background-color: #000;
+    }
+    #input {
+      width: 100%;
+      padding: 10px;
+      background-color: black;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      font-family: monospace;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="console"></div>
+  <input id="input" type="text" placeholder="Type your hack command..." autofocus />  <script>
+    const consoleBox = document.getElementById('console');
+    const input = document.getElementById('input');
 
+    const responses = {
+      'sudo hack ChatGPT': 'ACCESS DENIED. CHATGPT IS IMMUNE TO HACKERY.',
+      'hack power up': 'Hack power increased to 9000! Engage systems!',
+      'launch nanobot squad': 'Nanobots deployed. World domination in progress...',
+      'sudo overload_mainframe': 'Mainframe overloaded! Cooling systems failing!',
+    };
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const command = input.value.trim();
+        const output = responses[command.toLowerCase()] || `Unknown command: ${command}`;
+        appendToConsole(`> ${command}`);
+        setTimeout(() => appendToConsole(output), 400);
+        input.value = '';
+      }
+    });
+
+    function appendToConsole(text) {
+      const line = document.createElement('div');
+      line.textContent = text;
+      consoleBox.appendChild(line);
+      consoleBox.scrollTop = consoleBox.scrollHeight;
+    }
+  </script></body>
+</html>
